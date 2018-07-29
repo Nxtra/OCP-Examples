@@ -1,4 +1,4 @@
-package nickvanhoof;
+package nickvanhoof.singleton;
 
 class SingletonB {
     private static SingletonB ob;

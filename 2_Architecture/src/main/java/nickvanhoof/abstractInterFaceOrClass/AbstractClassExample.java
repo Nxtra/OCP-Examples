@@ -1,4 +1,4 @@
-package nickvanhoof;
+package nickvanhoof.abstractInterFaceOrClass;
 
 public class AbstractClassExample extends AbstractClass{
 
