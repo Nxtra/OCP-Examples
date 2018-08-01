@@ -5,7 +5,7 @@ class SingletonA{
 
     private SingletonA(){}
 
-    public static SingletonA getInstance() {
+    public static synchronized SingletonA getInstance() {
         return ob;
     }
 }

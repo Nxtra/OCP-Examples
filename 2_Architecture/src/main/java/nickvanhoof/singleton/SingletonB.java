@@ -9,7 +9,7 @@ class SingletonB {
         ob = new SingletonB();
     }
 
-    public static SingletonB getInstance() {
+    public static synchronized SingletonB getInstance() {
         return ob;
     }
 }
