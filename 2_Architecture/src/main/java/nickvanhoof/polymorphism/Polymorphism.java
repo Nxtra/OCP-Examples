@@ -18,6 +18,9 @@ public class Polymorphism {
         System.out.println(((Puma) animal4).getSound());
 
         ((Puma) animal4).eatFood();
+
+        //animal4.climbTree();//does not compile, cause method in unavailable in the reference type of this animal
+        ((Puma) animal4).climbTree();//does compile, cause we casted the reference type to Puma
     }
 }
 
@@ -28,7 +31,8 @@ interface Animal{
 
 class Cat implements Animal{
 
-    public String sound = "meow";
+    protected String sound = "meow";
+    private boolean landAnimal = true;
 
     public String getSound() {
         return sound;
@@ -37,16 +41,17 @@ class Cat implements Animal{
 
 class Tiger extends Cat{
 
-    @Override
-    public String getSound() {
-        return sound;
-    }
+    protected String sound = "Grr";//will look in Cat for getSound() method but not back in Tiger for sound
 }
 
 class Lion extends Cat{
 
     public String sound = "Roar";
 
+    @Override
+    public String getSound() {
+        return sound;
+    }
 
 }
 
@@ -61,6 +66,10 @@ class Puma extends Cat{
 
     public void eatFood(){
         System.out.println("Yum Yum");
+    }
+
+    public void climbTree(){
+        System.out.println("I'm currently in a tree");
     }
 }
 
