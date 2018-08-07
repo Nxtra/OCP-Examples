@@ -46,7 +46,7 @@ class Tiger extends Cat{
 
 class Lion extends Cat{
 
-    public String sound = "Roar";
+    private String sound = "Roar";
 
     @Override
     public String getSound() {
@@ -57,7 +57,7 @@ class Lion extends Cat{
 
 class Puma extends Cat{
 
-    public String sound = "RRAAAR";
+    private String sound = "RRAAAR";
 
     @Override
     public String getSound(){
