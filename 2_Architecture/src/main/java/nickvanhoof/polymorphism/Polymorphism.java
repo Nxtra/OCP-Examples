@@ -8,15 +8,16 @@ public class Polymorphism {
         Animal animal3 = new Lion();
         Animal animal4 = new Puma();
 
-        System.out.println(animal1.getSound());
-        System.out.println(animal2.getSound());
-        System.out.println(animal3.getSound());
-        System.out.println(animal4.getSound());
+        System.out.println(animal1.getSound()); //meow
+        System.out.println(animal2.getSound()); //meow
+        System.out.println(animal3.getSound()); //Roar
+        System.out.println(animal4.getSound()); //Rraar
 
-        System.out.println(((Tiger) animal2).getSound());
-        System.out.println(((Lion) animal3).getSound());
-        System.out.println(((Puma) animal4).getSound());
+        System.out.println(((Tiger) animal2).getSound()); //meow
+        System.out.println(((Lion) animal3).getSound());  //Roar
+        System.out.println(((Puma) animal4).getSound());  //Rraar
 
+        // animal4.eatFood(); does not compile
         ((Puma) animal4).eatFood();
 
         //animal4.climbTree();//does not compile, cause method in unavailable in the reference type of this animal

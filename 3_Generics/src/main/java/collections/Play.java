@@ -19,14 +19,15 @@ public class Play {
         print(listOfPeople.remove("Dieter")); //False
         listOfPeople.add("Jan");
         print(listOfPeople);
-        listOfPeople.remove("Jan"); // Removes the first occurrence of the specified element from this list
+        print("removing Jan");
+        print(listOfPeople.remove("Jan")); // Removes the first occurrence of the specified element from this list
         print(listOfPeople);
         print(listOfPeople.contains("Jan")); // True
         listOfPeople.clear(); //void
         print(listOfPeople.size()); // 0
         print(listOfPeople.isEmpty()); // true
-
-
+        listOfPeople.add("John");
+        print(listOfPeople.set(0,"Nick")); // returns the original
 
     }
 
