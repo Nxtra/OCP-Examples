@@ -2,15 +2,26 @@ package generics;
 
 import java.lang.reflect.AnnotatedArrayType;
 
+import static java.lang.System.out;
+
 public class Zoo {
 
-    Bear bear = new Bear();
-    Crate<Animal> crate = new Crate<>();
+    private Bear bear = new Bear("Olaf", "Black");
+    private Crate<Animal> crate = new Crate<>();
+
+    public Bear getBear() {
+        return bear;
+    }
+
+    public Crate<Animal> getCrate() {
+        return crate;
+    }
 
     public static void main(String[] args) {
         Zoo zoo = new Zoo();
-        zoo.crate.inputCrate(zoo.bear);
-        Animal outputAnimal = zoo.crate.getContent(); //cast to Animal will be added at compile time
+        zoo.getCrate().inputCrate(zoo.getBear());
+        Animal outputAnimal = zoo.getCrate().getContent(); //cast to Animal will be added at compile time
+        out.println(outputAnimal);
     }
 
 
@@ -29,11 +40,23 @@ public class Zoo {
 
     class Bear extends Animal{
 
+        Bear(String name, String species) {
+            this.name = name;
+            this.species = species;
+        }
+
+        @Override
+        public String toString() {
+            return "Bear{" +
+                    "name='" + name + '\'' +
+                    ", species='" + species + '\'' +
+                    '}';
+        }
     }
 
     class Animal implements LivingThing{
-        private String name;
-        private String species;
+        protected String name;
+        protected String species;
 
         public String getSpecies(){
             return species;
@@ -44,8 +67,16 @@ public class Zoo {
         }
 
         @Override
+        public String toString() {
+            return "Animal{" +
+                    "name='" + name + '\'' +
+                    ", species='" + species + '\'' +
+                    '}';
+        }
+
+        @Override
         public void think() {
-            System.out.println(String.format("%s is thinking", name));
+            out.println(String.format("%s is thinking", name));
         }
     }
 
