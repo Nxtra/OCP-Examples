@@ -1,53 +1,66 @@
 package nickvanhoof.polymorphism;
 
+import java.util.logging.Logger;
+
+import static java.lang.System.out;
+
 public class Polymorphism {
 
+    private static final Logger LOGGER = Logger.getLogger( Polymorphism.class.getName() );
+
     public static void main(String[] args) {
-	    Animal animal1 = new Cat();
-        Animal animal2 = new Tiger();
-        Animal animal3 = new Lion();
-        Animal animal4 = new Puma();
+	    Animal cat = new Cat();
+        Animal tiger = new Tiger();
+        Animal lion = new Lion();
+        Animal puma = new Puma();
+        Cat puma2 = new Puma();
+        Cat seaCat = new SeaCat();
 
-        System.out.println(animal1.getSound()); //meow
-        System.out.println(animal2.getSound()); //meow
-        System.out.println(animal3.getSound()); //Roar
-        System.out.println(animal4.getSound()); //Rraar
-
-        System.out.println(((Tiger) animal2).getSound()); //meow
-        System.out.println(((Lion) animal3).getSound());  //Roar
-        System.out.println(((Puma) animal4).getSound());  //Rraar
+        out.println(cat.getSound()); // CatSound
+        out.println(tiger.getSound()); // CatSound
+        out.println(lion.getSound()); // LionSound
+        out.println(puma.getSound()); // PumaSound
 
         // animal4.eatFood(); does not compile
-        ((Puma) animal4).eatFood();
+        ((Puma) puma).eatFood();
 
         //animal4.climbTree();//does not compile, cause method in unavailable in the reference type of this animal
-        ((Puma) animal4).climbTree();//does compile, cause we casted the reference type to Puma
+        ((Puma) puma).climbTree();//does compile, cause we casted the reference type to Puma
+
+        out.println(((Cat) cat).isLandAnimal());//does compile, cause we casted the reference type to Puma
+        out.println(((Puma) puma).isLandAnimal());//does compile, cause we casted the reference type to Puma
+        out.println(puma2.isLandAnimal());//does compile, cause we casted the reference type to Puma
+        out.println(seaCat.isLandAnimal());
     }
 }
 
 interface Animal{
 
-    public String getSound();
+    String getSound();
 }
 
 class Cat implements Animal{
 
-    protected String sound = "meow";
-    private boolean landAnimal = true;
+    protected String sound = "CatSound";
+    boolean landAnimal = true;
 
     public String getSound() {
         return sound;
+    }
+
+    boolean isLandAnimal() {
+        return landAnimal;
     }
 }
 
 class Tiger extends Cat{
 
-    protected String sound = "Grr";//will look in Cat for getSound() method but not back in Tiger for sound
+    protected String sound = "TigerSound";//will look in Cat for getSound() method but not back in Tiger for sound
 }
 
 class Lion extends Cat{
 
-    private String sound = "Roar";
+    private String sound = "LionSound";
 
     @Override
     public String getSound() {
@@ -58,20 +71,25 @@ class Lion extends Cat{
 
 class Puma extends Cat{
 
-    private String sound = "RRAAAR";
+    private String sound = "PumaSound";
 
     @Override
     public String getSound(){
         return sound;
     }
 
-    public void eatFood(){
-        System.out.println("Yum Yum");
+    void eatFood(){
+        out.println("Yum Yum");
     }
 
-    public void climbTree(){
-        System.out.println("I'm currently in a tree");
+    void climbTree(){
+        out.println("I am climbing a tree");
     }
+}
+
+class SeaCat extends Cat{
+
+    boolean landAnimal = false;
 }
 
 
