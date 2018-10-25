@@ -83,4 +83,15 @@ public class Zoo {
     interface LivingThing{
         void think();
     }
+
+    public static  <E> boolean containsSomeThing(E [] listOfThings, E someThing){
+        for (E e : listOfThings){
+            if(e.equals(someThing)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+

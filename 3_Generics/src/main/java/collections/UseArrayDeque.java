@@ -3,7 +3,7 @@ package collections;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class ADeque {
+public class UseArrayDeque {
 
     public static void main(String[] args) {
         Queue<Integer> arrayDeque = new ArrayDeque<>();
