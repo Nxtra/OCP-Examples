@@ -8,15 +8,13 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import java.util.Map.Entry;
-
 public class JSONMap {
 
     private static final String JSON = getFile("example.json");
     private static final List<String> ALLOWEDKEYS = Arrays.asList("firstName", "name", "phoneNumbers", "age");
 
     // if only I'd use Java9 .. Map<String, String> map = Map.of("some", "A", "bla", "B");
-    private static Map<String, String> TRANSFORMATIONS;
+    private static final Map<String, String> TRANSFORMATIONS;
 
     static {
         TRANSFORMATIONS = Collections.unmodifiableMap(new HashMap<String, String>() {
@@ -27,7 +25,7 @@ public class JSONMap {
         });
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         Map<String, Object> result = updateJSON(convertJsonToSortedMap(JSON));
 
         result.put("shizzle", "someShizzle");
@@ -36,9 +34,8 @@ public class JSONMap {
         printJSON(result);
     }
 
+    // I want the current keys to keep their order and the added keys to be appended at the end
     private static Map<String,Object> updateJSON(Map<String, Object> json) {
-
-        // I want the current keys to keep their order and the added keys to be appended at the end
         return json.entrySet()
                 .stream()
                 .filter(e -> ALLOWEDKEYS.contains(e.getKey()))
@@ -49,7 +46,7 @@ public class JSONMap {
                         LinkedHashMap::new));
     }
 
-    private static String updateKey(Entry<String, Object> entry, Map<String, String> transformations){
+    private static String updateKey(Map.Entry<String, Object> entry, Map<String, String> transformations){
         if (transformations.containsKey(entry.getKey())) {
             return transformations.get(entry.getKey());
         } else {
@@ -64,14 +61,13 @@ public class JSONMap {
     }
 
     // I want the JSON keys sorted -> TreeMap
-    private static Map<String, Object> convertJsonToSortedMap(String json) throws IOException {
+    private static Map<String, Object> convertJsonToSortedMap(String json){
         return (TreeMap<String,Object>) new Gson().fromJson(json, TreeMap.class);
 //        return new ObjectMapper().readValue(JSON, HashMap.class);
     }
 
     private static String getFile(String fileName) {
-
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
 
         //Get file from resources folder
         ClassLoader classLoader = JSONMap.class.getClassLoader();
