@@ -1,0 +1,32 @@
+{
+  "firstName": "Mick",
+  "name": "Mack",
+  "isAlive": true,
+  "age": 25,
+  "address": {
+    "streetAddress": "Deederi",
+    "city": "Owas",
+    "state": "WE",
+    "postalCode": "3333"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "499 209-4020"
+    },
+    {
+      "type": "office",
+      "number": "235 243-4235"
+    },
+    {
+      "type": "mobile",
+      "number": "499 323-4903"
+    }
+  ],
+  "children": [
+    {
+      "firstName": "John",
+      "lastName": "Mack"
+    }
+  ]
+}
