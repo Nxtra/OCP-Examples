@@ -2,8 +2,11 @@ package ForkJoin;
 
 import util.StopWatch;
 
+import java.lang.instrument.Instrumentation;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class UseForkJoin {
 
@@ -46,16 +49,15 @@ public class UseForkJoin {
 
             if(high - low <= 25) {
                 System.out.println(Thread.currentThread().toString() + ": high: " + high + ", low: " + low);
-                long sum = 0;
+                return LongStream.range(low, high).sum();
 
-                for(int i = low; i < high; ++i)
-                    sum += array[i];
-                return sum;
             } else {
                 System.out.println(Thread.currentThread().toString() + ": high: " + high + ", low: " + low);
                 int mid = low + (high - low) / 2;
+
                 CalculationTask leftPart  = new CalculationTask(array, low, mid);
                 CalculationTask rightPart = new CalculationTask(array, mid, high);
+
                 // fork() splits into subtasks
                 // pushes it on the dequeue of the current thread
                 // other threads do "workstealing" and steal a task from the back of the current Threads dequeue
@@ -65,6 +67,7 @@ public class UseForkJoin {
                 long rightResult = rightPart.compute();
                 // join the result of all the subtasks
                 long leftResult  = leftPart.join();
+
                 return leftResult + rightResult;
             }
         }
