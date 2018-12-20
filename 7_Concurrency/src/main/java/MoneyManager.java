@@ -1,13 +1,12 @@
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MoneyManager {
+public class MoneyManager implements Runnable {
 
     private int moneyCount;
 
     //    private void getPayCheck(){
-    private synchronized void getPayCheck() {
+    public synchronized void run() {
         moneyCount += 1500;
         try {
             Thread.sleep(100);
@@ -22,7 +21,7 @@ public class MoneyManager {
         try {
             MoneyManager moneyManager = new MoneyManager();
             for (int i = 0; i < 24; i++) {
-                executorService.submit(moneyManager::getPayCheck);
+                executorService.submit(moneyManager::run);
             }
         } finally {
             System.out.println("Shutting  down");

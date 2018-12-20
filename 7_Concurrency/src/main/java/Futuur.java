@@ -12,7 +12,6 @@ public class Futuur {
             executorService = Executors.newSingleThreadExecutor();
             Future<?> result = executorService.submit(() -> {
                 count = IntStream.rangeClosed(0, 1000000).sum();
-
             });
             // get will return the result of the Runnable method
             // run() returns void, so the get() method returns null

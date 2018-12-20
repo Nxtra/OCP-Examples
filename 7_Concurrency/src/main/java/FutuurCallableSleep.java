@@ -10,7 +10,9 @@ public class FutuurCallableSleep {
             executorService = Executors.newFixedThreadPool(2);
             Future<Integer> result = executorService.submit(() -> {
                 System.out.println(Thread.currentThread().getName() + ": Counting..");
+
                 TimeUnit.SECONDS.sleep(1);
+
                 int value = IntStream.rangeClosed(0, 1000000).sum();
                 System.out.println(Thread.currentThread().getName() + ": Counted: " + value);
                 return value;
@@ -23,7 +25,9 @@ public class FutuurCallableSleep {
                 return null;
             });
             count = result.get();
-
+            // We are not waiting for the second worker thread to complete, thus the shutting down will start while
+            // this task is still executing
+            // shutting down will await termiation till task is complete
             System.out.println("Reached end of try block");
             System.out.println(Thread.currentThread().getName() + ": Count is " + count);
         }
