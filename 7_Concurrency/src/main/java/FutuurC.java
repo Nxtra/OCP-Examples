@@ -5,10 +5,9 @@ import java.util.stream.IntStream;
 public class FutuurC {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executorService = null;
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         int count = 0;
         try {
-            executorService = Executors.newSingleThreadExecutor();
             Future<Integer> result = executorService.submit(() -> IntStream.rangeClosed(0, 1000000).sum());
             // get will return the result of the Callable method
             // call() return Integer here, so the get() method returns Integer

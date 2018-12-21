@@ -2,10 +2,8 @@ package ForkJoin;
 
 import util.StopWatch;
 
-import java.lang.instrument.Instrumentation;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class UseForkJoin {
@@ -63,9 +61,12 @@ public class UseForkJoin {
                 // other threads do "workstealing" and steal a task from the back of the current Threads dequeue
                 // According to this thread-1 will always execute the smallest right subtask
                 leftPart.fork();
+
                 // current thread goes further to compute right
                 long rightResult = rightPart.compute();
+
                 // join the result of all the subtasks
+                // By joining on the task, you are suspending the main thread until the fork join tasks complete.
                 long leftResult  = leftPart.join();
 
                 return leftResult + rightResult;

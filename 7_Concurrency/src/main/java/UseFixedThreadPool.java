@@ -1,13 +1,16 @@
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
-public class FutuurCallableSleep {
+public class UseFixedThreadPool {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
+
         int count = 0;
         ExecutorService executorService = null;
+
         try {
             executorService = Executors.newFixedThreadPool(2);
+
             Future<Integer> result = executorService.submit(() -> {
                 System.out.println(Thread.currentThread().getName() + ": Counting..");
 
@@ -17,14 +20,16 @@ public class FutuurCallableSleep {
                 System.out.println(Thread.currentThread().getName() + ": Counted: " + value);
                 return value;
             });
+
             executorService.submit(() -> {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 5; i++) {
                     TimeUnit.SECONDS.sleep(1);
                     System.out.println(Thread.currentThread().getName() + ": Sleeping..");
                 }
                 return null;
             });
             count = result.get();
+
             // We are not waiting for the second worker thread to complete, thus the shutting down will start while
             // this task is still executing
             // shutting down will await termiation till task is complete
