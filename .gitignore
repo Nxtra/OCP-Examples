@@ -6,3 +6,8 @@ out/*
 
 #Maven
 */target/*
+
+#Oracle
+flowers.jpg
+flowers-blurred.jpg
+/7_Concurrency/src/main/java/ForkJoin/ForkBlur.java
