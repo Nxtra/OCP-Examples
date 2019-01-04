@@ -2,7 +2,7 @@ package java8;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public class UseMergeOnMap {
 
@@ -12,7 +12,7 @@ public class UseMergeOnMap {
         favoriteFood.put("Nick", "Fries");
         favoriteFood.put("Tom", null);
 
-        BiFunction<String, String, String> mapper = (s1, s2) -> s1.compareTo(s2) < 0 ? s1 : s2;
+        BinaryOperator<String> mapper = (s1, s2) -> s1.compareTo(s2) < 0 ? s1 : s2;
 
         favoriteFood.merge("Nick", "Pancakes", mapper);
         favoriteFood.merge("Loren", "Strawberries", mapper);
