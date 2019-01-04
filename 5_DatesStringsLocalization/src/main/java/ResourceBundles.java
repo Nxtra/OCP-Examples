@@ -4,7 +4,9 @@ import java.util.ResourceBundle;
 public class ResourceBundles {
     public static void main(String[] args) {
         Locale us = new Locale("en","US");
-        Locale fr = new Locale("fr","FR");
+        us = new Locale("en", "US");
+        Locale fr = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+
         printProperties(us);
         printProperties(fr);
     }
